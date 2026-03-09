@@ -22,14 +22,16 @@ export const webNotificationService = {
                 ];
             }
 
+            const message = notification.html
+                ? markup(notification.message)
+                : notification.message;
             const notificationRemove = notificationService.add(
-                markup(notification.message),
+                message,
                 {
                     title: notification.title,
                     type: notification.type,
                     sticky: notification.sticky,
                     className: notification.className,
-                    messageIsHtml: notification.html,
                     buttons: buttons.map((button) => {
                         const onClick = button.onClick;
                         button.onClick = async () => {
